@@ -1,0 +1,29 @@
+IF
+	Global("7C#Yoshi","GLOBAL",2)
+	!Exists("7C#Toros")
+	!Global("7C#Mages","GLOBAL",1)
+	Global("7C#SpellHold","GLOBAL",3)
+	InParty(%yoshi%)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("7C#YoshiMageTrigger","GLOBAL",THREE_ROUNDS)
+		SetGlobal("7C#Yoshi","GLOBAL",3)
+END
+
+IF
+	!Exists("7C#Toros")
+	!Global("7C#Mages","GLOBAL",1)
+	!Dead(%yoshi%)
+	InParty(%yoshi%)
+	Global("7C#Yoshi","GLOBAL",3)
+	Global("7C#SpellHold","GLOBAL",3)
+	CheckStatGT(Player1,15,LEVEL)
+	GlobalTimerExpired("7C#YoshiMageTrigger","GLOBAL")
+THEN
+	RESPONSE #100
+		CreateCreatureObjectOffScreen("7C#Toros",Player1,0,0,0)
+		CreateCreatureObjectOffScreen("7C#demor",Player1,0,0,0)
+		SetGlobal("7C#Mages","GLOBAL",1)
+		ActionOverride("7C#Toros",StartDialogueNoSet(Player1))
+		Continue()
+END

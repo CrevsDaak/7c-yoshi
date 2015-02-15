@@ -1,0 +1,76 @@
+@9900 = ~Keeping Yoshimo after Spellhold~
+@9901 = ~Your game is incompatible with this mod because it's a BG1/TuTu install.~
+@9902 = ~Patched BGMain.exe, Yoshimo now stays for ToB~
+@9903 = ~This step may take a few minutes, please be patient ...~
+@9904 = ~Katana~
+@9905 = ~Celestial Harmony +3~
+@9906 = ~The katana is a single-edged, slightly curved sword which ends in a chisel point. The katana is perhaps one of the finest swords ever made, the steps to its creation both complex and secret, and more an art form than anything else. This blade is an important facet of Kara-Tur culture. To touch or wield a samurai's katana is to insult the samurai and to incite his wrath. For a gaijin, or foreigner, to own such a blade is rare. Either the gaijin is a greatly honored friend of an important minister, or the gaijin has murdered a samurai.
+
+STATISTICS:
+
+Damage: 1D10
+Damage type: slashing
+Speed Factor: 4
+Proficiency Type: Katana
+Type: 1-handed
+Requires: 6 Strength
+
+Weight: 6~
+@9907 = ~The katana is a single-edged, slightly curved sword which ends in a chisel point. The katana is perhaps one of the finest swords ever made, the steps to its creation both complex and secret, and more an art form than anything else. This blade is an important facet of Kara-Tur culture, embedded in fine jewels, shaped much like the other of it's pair; Celestial Fury, and it's abilities are a near exact match. This Katana was owned by Torosan, whom you defeated on his hunt for Yoshimo. It is bound to Yoshimo, now, with abilities surpassing all but the rarest Katanas in the land.
+
+STATISTICS:
+
+Abilities:
+ Calm Mind: +2 INT
+            50% Movement
+            Slower APR
+ 
+ Quick Parry: 10% Chance on hit to be immune to all weapons for one round
+
+Damage: 1D10 +3
+Damage type: slashing
+Speed Factor: 1
+Proficiency Type: Katana
+Type: 1-handed
+Requires: 6 Strength
+
+Weight: 6~
+@9908 = ~The katana is a single-edged, slightly curved sword which ends in a chisel point. The katana is perhaps one of the finest swords ever made, the steps to its creation both complex and secret, and more an art form than anything else. This blade is an important facet of Kara-Tur culture. To touch or wield a samurai's katana is to insult the samurai and to incite his wrath. For a gaijin, or foreigner, to own such a blade is rare. Either the gaijin is a greatly honored friend of an important minister, or the gaijin has murdered a samurai.
+
+STATISTICS:
+
+Damage: 1D10
+Damage type: slashing
+Weight: 6
+Speed Factor: 4
+Proficiency Type: Katana
+Type: 1-handed
+Requires: 6 Strength
+Not Usable By:
+ Druid
+ Cleric
+ Mage
+ Beast Master~
+@9909 = ~The katana is a single-edged, slightly curved sword which ends in a chisel point. The katana is perhaps one of the finest swords ever made, the steps to its creation both complex and secret, and more an art form than anything else. This blade is an important facet of Kara-Tur culture, embedded in fine jewels, shaped much like the other of it's pair; Celestial Fury, and it's abilities are a near exact match. This Katana was owned by Torosan, whom you defeated on his hunt for Yoshimo. It is bound to Yoshimo, now, with abilities surpassing all but the rarest Katana's in the land.
+
+STATISTICS:
+
+Abilities:
+ Calm Mind: +2 INT
+            50% Movement
+            Slower APR
+ 
+ Quick Parry: 10% Chance on hit to be immune to all weapons for one round
+
+Damage: 1D10 +3
+Damage type: slashing
+Weight: 6
+Speed Factor: 1
+Proficiency Type: Katana
+Type: 1-handed
+Usable by:
+ Yoshimo~
+@9910 = ~Make Yoshimo Chaotic Good~
+@9911 = ~As you wish, for your fates are entwined.~
+@-1004= "PLEASE post the file"
+@-1005= "on"

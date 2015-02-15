@@ -1,0 +1,12 @@
+IF
+	InParty(%yoshi%)
+	Global("7C#SpellHold","GLOBAL",0)
+	Global("7C#Yoshi","GLOBAL",0)
+	!Global("7C#Mages","GLOBAL",1)
+	Global("7C#Yoshi_Brynnlaw","GLOBAL",0)
+THEN
+	RESPONSE #100
+		SetGlobal("7C#Yoshi_Brynnlaw","GLOBAL",1)
+		SetGlobalTimer("7C#Yoshi_Brynnlaw","GLOBAL",THREE_ROUNDS)
+		Continue()
+END

@@ -1,0 +1,248 @@
+// CrevsDaak: I changed the original #!
+// modding signature since it was causing
+// problems while installing in Mac.
+
+BACKUP ~7C#Yoshi/Backup~
+AUTHOR ~http://forums.gibberlings3.net/index.php?showtopic=26561~
+
+VERSION "v0.94 b"
+
+// so new files are created if they are missing
+ALLOW_MISSING
+ ar0700.bcs
+ ar0900.bcs
+ ar0400.bcs
+ ar0800.bcs
+ ar0300.bcs
+ ar0020.bcs
+ ar1000.bcs
+ ar0500.bcs
+
+ALWAYS
+  OUTER_SPRINT tra "7C#Yoshi/lang/%LANGUAGE%"
+END
+
+LANGUAGE
+ "English"
+ "ENGLISH"
+ "7C#Yoshi/lang/english/setup.tra"
+
+// ******* Keeping Yoshimo after Spellhold ******* \\
+BEGIN @9900 DESIGNATED 5
+REQUIRE_PREDICATE GAME_IS "bg2ee bgt bg2 tob soa" @9901
+ UNINSTALL "#!Yoshi.tp2" "0"
+ UNINSTALL "#!Yoshi.tp2" "1"
+
+ACTION_IF GAME_IS "bg2ee eet" BEGIN
+ OUTER_SET old_way = 1
+ OUTER_TEXT_SPRINT yoshi ~"7C#Yoshi"~
+END ELSE BEGIN
+ OUTER_TEXT_SPRINT exetopatch BGmain
+ OUTER_TEXT_SPRINT yoshi ~"Yoshimo"~
+END
+
+APPEND ~STATE.IDS~ ~0x80101FEF CD_STATE_NOTVALID~
+  UNLESS ~0x80101FEF CD_STATE_NOTVALID~
+
+ACTION_DEFINE_ASSOCIATIVE_ARRAY append_gtimes BEGIN
+  ONE_ROUND => 6
+  TWO_ROUNDS => 12
+  THREE_ROUNDS => 18
+  FOUR_ROUNDS => 24
+  FIVE_ROUNDS => 30
+  SIX_ROUNDS => 36
+  SEVEN_ROUNDS => 42
+  EIGHT_ROUNDS => 48
+  NINE_ROUNDS => 54
+  TEN_ROUNDS => 60
+END
+
+ACTION_PHP_EACH append_gtimes AS name => value BEGIN
+  APPEND gtimes.ids ~%value% %name%~
+    UNLESS ~%value% %name%~
+END
+
+ACTION_IF ENGINE_IS tob BEGIN
+  ACTION_IF FILE_EXISTS ~%exetopatch%.exe~ BEGIN
+
+    COPY_EXISTING "%exetopatch%.exe" "%exetopatch%.exe"
+      REPLACE_TEXTUALLY CASE_SENSITIVE ~YOSHIMO~ ~       ~
+    BUT_ONLY
+
+    PRINT @9902
+  END
+END
+
+ACTION_IF !GAME_IS soa BEGIN
+  COPY_EXISTING yoshi8.cre "override/yoshi15.cre"
+    WRITE_LONG 0x18 2500000
+    WRITE_ASCII 0x2cc "7C#Y#TOB" #8
+    READ_SHORT 0x26 max_hp
+    WRITE_SHORT 0x24 max_hp
+
+  EXTEND_BOTTOM "ar4500.bcs" "7C#Yoshi/Baf/append_ar4500.baf" EVAL
+  COMPILE EVAL ~7C#Yoshi/Dlg/Yoshi_ToB.d~ USING "%tra%/yoshi_tob.tra"
+
+  COPY_EXISTING fatesp.dlg override
+    DECOMPILE_AND_PATCH BEGIN
+      REPLACE_TEXTUALLY ~Global("YoshimoSummoned","GLOBAL",0)~ ~!Dead(%yoshi%) !InMyArea(%yoshi%) Global("7C#Yoshi_ToB","GLOBAL",0)~
+      REPLACE_TEXTUALLY EXACT_MATCH ~SetGlobal("YoshimoSummoned","GLOBAL",2)~ ~SetGlobal("7C#Yoshi_ToB","GLOBAL",1)~
+      REPLACE_TEXTUALLY EXACT_MATCH ~GOTO 10~ ~GOTO 8~
+    END
+  BUT_ONLY
+END
+
+COPY_EXISTING npsw02.itm "override/7c#kat01.itm"
+  // CrevsDaak: Remove stat requirements too
+  READ_BYTE  0x1e "usability"
+  WRITE_BYTE 0x1e (usability BAND 0b11000000)
+  PATCH_IF GAME_IS "bg2ee eet" BEGIN
+    LPF DELETE_ITEM_EQEFFECT
+      INT_VAR
+	  opcode_to_delete = 319
+    END
+  END
+  WRITE_SHORT 0x26 0
+  WRITE_BYTE 0x28 0
+  WRITE_BYTE 0x2a 0
+  WRITE_BYTE 0x2c 0
+  WRITE_BYTE 0x2e 0
+  WRITE_BYTE 0x30 0
+  WRITE_SHORT 0x32 0
+  WRITE_LONG 0x1e (0x1e - 0x1e)
+  WRITE_SHORT 0x29 (0x29 - 0x29)
+  WRITE_BYTE 0x2b (0x2b - 0x2b)
+  WRITE_BYTE 0x2f (0x2F - 0x2f)
+
+ACTION_IF GAME_IS  "bg2ee eet" BEGIN
+  COPY_EXISTING npsw02.itm override
+    LPF DELETE_ITEM_EQEFFECT
+      INT_VAR
+	  opcode_to_delete = 319
+    END
+    LPF ADD_ITEM_EQEFFECT
+      INT_VAR
+	opcode = 319
+	target = 1
+	power = 1
+	parameter2 = 11
+	timing = 2
+     STR_VAR
+	resource = 7C#YOSHI
+    END
+    READ_LONG 0x6a effect_offset
+    READ_SHORT 0x70 effect_count
+    FOR (loop_count = 0; loop_count < effect_count; ++loop_count) BEGIN
+      READ_SHORT (effect_offset + loop_count * 0x30) effect_opcode
+        PATCH_IF effect_opcode = 319 BEGIN
+          WRITE_LONG (effect_offset + 0x2c + loop_count * 0x30) 9107
+        END
+    END
+  BUT_ONLY
+END
+
+COPY "7C#Yoshi/Itm/7C#kat2.itm" override
+  SAY NAME1 @9904
+  SAY NAME2 @9905
+  PATCH_IF GAME_IS bg2ee BEGIN
+    LPF ADD_ITEM_EQEFFECT
+      INT_VAR
+	opcode = 319
+	target = 1
+	power = 1
+	parameter2 = 11
+	timing = 2
+     STR_VAR
+	resource = 7C#YOSHI
+    END
+    READ_LONG 0x6a effect_offset
+    READ_SHORT 0x70 effect_count
+    FOR (loop_count = 0; loop_count < effect_count; ++loop_count) BEGIN
+      READ_SHORT (effect_offset + loop_count * 0x30) effect_opcode
+        PATCH_IF effect_opcode = 319 BEGIN
+          WRITE_LONG (effect_offset + 0x2c + loop_count * 0x30) 9107
+        END
+    END
+  SAY UNIDENTIFIED_DESC @9906
+  SAY DESC @9907 END ELSE BEGIN
+  SAY UNIDENTIFIED_DESC @9908
+  SAY DESC @9909 END
+
+/* * MAGE ENCOUNTER * */
+
+ACTION_IF GAME_IS bg2ee BEGIN
+  APPEND item_use.2da ~7C#KAT2   7C#YOSHI    9382   2~
+    UNLESS ~7C#KAT2~
+
+  COPY ~7C#Yoshi/Portraits/ee~ override
+END ELSE BEGIN
+  COPY ~7C#Yoshi/Portraits~ override
+END
+
+ACTION_FOR_EACH area IN ar0700 ar0900 ar0400 ar0800 ar0300 ar0020 ar1000 ar0500 BEGIN
+  EXTEND_TOP "%area%.bcs" "7C#Yoshi/Baf/ar0700.baf" EVAL
+END
+
+// CrevsDaak: change the file used as base for this Mages so
+// they are of different specializations if SCS is installed.
+COPY_EXISTING mage20b.cre ~override/7C#toros.cre~
+ SAY NAME1 ~Torosan~
+ SAY NAME2 ~Torosan~
+ WRITE_ASCII 0x34 ~7C#TorS~ #8   //portraits
+ WRITE_ASCII 0x3c ~7C#TorL~ #8
+ WRITE_ASCII 0x2cc ~7C#Toro~ #8  //Dialogue
+ WRITE_ASCII 0x280 ~7C#Torosa~ #32 //DV
+ WRITE_BYTE 0x270 128 //neutral
+ REMOVE_CRE_ITEMS
+ ADD_CRE_ITEM 7C#kat2 #1 #0 #0 UNSTEALABLE INV1
+ ADD_CRE_ITEM amul21 #0 #0 #0 "UNSTEALABLE&UNDROPPABLE" AMULET
+ ADD_CRE_ITEM ring39 #0 #0 #0 "UNSTEALABLE&UNDROPPABLE" RRING
+ ADD_CRE_ITEM clck16 #0 #0 #0 "UNSTEALABLE&UNDROPPABLE" ARMOR
+
+COPY_EXISTING mage20c.cre ~override/7C#demor.cre~
+ SAY NAME1 ~Demorthas~
+ SAY NAME2 ~Demorthas~
+ WRITE_ASCII 0x34 ~7C#DemS~ #8 //portraits
+ WRITE_ASCII 0x3c ~7C#DemL~ #8
+ WRITE_ASCII 0x2cc ~7C#Demor~ #8      //dialog
+ WRITE_ASCII 0x280 ~7C#Demor~ #32 //dv
+// WRITE_ASCII 0x248 ~7C#demor~ #8 // CrevsDaak: they don't have a script made, so don't do this.
+ WRITE_BYTE 0x270 128 //neutral
+ ADD_CRE_ITEM clck16 #0 #0 #0 "UNSTEALABLE&UNDROPPABLE" ARMOR
+
+EXTEND_BOTTOM "ar1600.bcs" "7C#Yoshi/Baf/append_ar1600.baf" EVAL
+EXTEND_BOTTOM "yoshimo.bcs" "7C#Yoshi/Baf/append_yoshi.baf" EVAL
+EXTEND_TOP "yoshimo.bcs" "7C#Yoshi/Baf/fix_yoshi_bug.baf" EVAL
+EXTEND_TOP "ar1500.bcs" "7C#Yoshi/Baf/ar1500.baf" EVAL
+
+COMPILE EVAL ~7C#Yoshi/Dlg/7C#torosan.d~ USING "%tra%/torosan.tra"
+COMPILE EVAL ~7C#Yoshi/Dlg/7C#yoshi.d~ USING "%tra%/yoshi.tra"
+COMPILE EVAL ~7C#Yoshi/Dlg/7C#yoshi_begin.d~ USING "%tra%/yoshi_begin.tra"
+COMPILE EVAL ~7C#Yoshi/Dlg/interjections.d~ USING "%tra%/interjections.tra"
+COMPILE EVAL ~7C#Yoshi/Dlg/n_yoshi_edit.d~ USING "%tra%/n_yoshi_edit.tra"
+COMPILE EVAL ~7C#Yoshi/Dlg/ToL.d~ USING "%tra%/tol.tra"
+
+ACTION_IF old_way BEGIN
+  INCLUDE ~7c#yoshi/lib/the_old_way.tph~
+END
+
+/* ******************* CG YOSHI ********************************** */
+BEGIN @9910 DESIGNATED 10
+ UNINSTALL "#!Yoshi.tp2" "0"
+ UNINSTALL "#!Yoshi.tp2" "1"
+
+COPY_EXISTING_REGEXP GLOB ~yoshi.*\.cre~ override
+ WRITE_BYTE 0x27b 49
+BUT_ONLY
+
+ACTION_IF (MOD_IS_INSTALLED "7C#Yoshi/setup-7C#Yoshi.tp2" 5) BEGIN
+  COPY_EXISTING_REGEXP GLOB ~7C#kat.*\.itm~ override
+    READ_BYTE 0x1e usability
+    WRITE_BYTE 0x1e (usability BAND 0b11111010)
+  BUT_ONLY
+END
+
+COPY_EXISTING npsw02.itm override
+  READ_BYTE 0x1e usability
+  WRITE_BYTE 0x1e (usability BAND 0b11111010)
+BUT_ONLY

@@ -1,0 +1,37 @@
+IF
+	Global("7C#Yoshi","GLOBAL",0)
+	Global("7C#Yoshi_Brynnlaw","GLOBAL",1)
+	GlobalTimerExpired("7C#Yoshi_Brynnlaw","GLOBAL")
+	InParty(Myself)
+	See(Player1)
+	Global("7C#SpellHold","GLOBAL",0)
+THEN
+	RESPONSE #100
+		SetGlobal("7C#Yoshi_Brynnlaw","GLOBAL",2)
+		SetGlobal("7C#Yoshi","GLOBAL",1)
+		StartDialogNoSet(Player1)
+END
+
+IF
+	InPartyAllowDead(Myself)
+	Global("7C#SpellHold","GLOBAL",1)
+	!Global("7C#Mages","GLOBAL",1)
+	Global("7C#Yoshi_Brynnlaw","GLOBAL",2)
+
+THEN
+	RESPONSE #100
+		SetGlobalTimer("7C#YoshiTrigger","GLOBAL",THREE_DAYS)
+		SetGlobal("7C#SpellHold","GLOBAL",2)
+END
+
+IF
+	See(Player1)
+	InParty(Myself)
+	Global("7C#SpellHold","GLOBAL",2)
+	Global("7C#Yoshi_Brynnlaw","GLOBAL",2)
+	GlobalTimerExpired("7C#YoshiTrigger","GLOBAL")
+THEN
+	RESPONSE #100
+		SetGlobal("7C#SpellHold","GLOBAL",3)
+		StartDialogNoSet(Player1)
+END

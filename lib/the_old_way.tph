@@ -1,0 +1,60 @@
+
+/*
+ * This archeological relic of the modern
+ * world of IE modding was part of the Keeping
+ * Yoshimo mod until it got replaced by a
+ * executable patching function.
+ *
+ *                     ------------
+ *                    /            \
+ *                   /     REST     \
+ *                  /       IN       \
+ *                 /      PEACE       \
+ *                /                    \
+ *                |     The Old Way     |
+ *                |        7 Au         |
+ *                |     killed by       | 
+ *                | executable patching |
+ *                |                     |
+ *                |                     |
+ *                |        2014         |
+ *               *|       *  *  *       | *
+ *       ________)/\\_//(\/(/\)/\//\///\/|_)_______
+ *
+ *
+ */
+
+COPY_EXISTING_REGEXP GLOB ~yoshi.*\.cre~ ~override~
+  WRITE_ASCII 0x280 ~7C#Yoshi~ #32
+BUT_ONLY
+
+PRINT @9903
+COPY_EXISTING_REGEXP GLOB ~^.+\.dlg$~ ~override~
+  DECOMPILE_AND_PATCH BEGIN
+    REPLACE_TEXTUALLY ~"Yoshimo"~ ~"7C#Yoshi"~
+    REPLACE_TEXTUALLY ~"SPRITE_IS_DEADYoshimo"~ ~"SPRITE_IS_DEAD7C#Yoshi"~
+    REPLACE_TEXTUALLY ~Allegiance(Myself,ANYONE)~ ~Allegiance(Myself,0)~ // do this to avoid the installation from crashing
+  END
+  IF ~Yoshimo~
+BUT_ONLY
+
+COPY_EXISTING_REGEXP GLOB ~^.+\.bcs$~ ~override~
+  DECOMPILE_AND_PATCH BEGIN
+    REPLACE_TEXTUALLY ~"Yoshimo"~ ~"7C#Yoshi"~
+    REPLACE_TEXTUALLY ~"SPRITE_IS_DEADYoshimo"~ ~"SPRITE_IS_DEAD7C#Yoshi"~
+    REPLACE_TEXTUALLY ~Allegiance(Myself,ANYONE)~ ~Allegiance(Myself,0)~ // do this to avoid the installation from crashing
+  END
+  IF ~Yoshimo~
+BUT_ONLY
+
+COPY_EXISTING pdialog.2da override
+  REPLACE_TEXTUALLY EXACT_MATCH ~YOSHIMO ~ ~7C#YOSHI~
+BUT_ONLY
+
+COPY_EXISTING item_use.2da override
+  REPLACE_TEXTUALLY EXACT_MATCH ~YOSHIMO ~ ~7C#YOSHI~
+BUT_ONLY
+
+COPY_EXISTING sw1h01.itm "override/the_old_way.7c" 
+
+// End of the archeological record.

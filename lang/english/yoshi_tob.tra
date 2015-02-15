@@ -1,0 +1,7 @@
+@0 = ~Good to see you again <CHARNAME>, should I join you and help you face the perils of adventuring?~
+@1 = ~Yes, I would be pleased.~
+@2 = ~No, I have enough people to accompany me in this journey.~
+@3 = ~I don't need your help right now. Wait here.~
+@4 = ~Welcome back, <CHARNAME>. Do you need my services now?~
+@5 = ~Yes, let's go adventuring.~
+@6 = ~No, I do not need your help now.~

@@ -1,0 +1,8 @@
+IF
+	InMyArea(Player1)
+	Global("7C#SpellHold","GLOBAL",0)
+THEN
+	RESPONSE #100
+		SetGlobal("7C#SpellHold","GLOBAL",1)
+		Continue()
+END

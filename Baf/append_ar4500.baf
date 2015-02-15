@@ -1,0 +1,10 @@
+IF
+	Global("7C#Yoshi_ToB","GLOBAL",1)
+	Global("YoshimoSpawnPlane","GLOBAL",0)
+THEN
+	RESPONSE #100
+		CreateVisualEffect("SPPORTAL",[1999.1218])
+		Wait(2)
+		CreateCreature("Yoshi15",[1999.1218],S)
+		SetGlobal("YoshimoSpawnPlane","GLOBAL",1)
+END

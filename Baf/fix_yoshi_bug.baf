@@ -1,0 +1,12 @@
+IF
+	OR(2)
+		Global("BYoshimo3","LOCALS",0)
+		Global("BYoshimo4","LOCALS",0)
+	Global("7C#Yoshi_fix_check","LOCALS",0)
+THEN
+	RESPONSE #100
+		SetGlobal("BYoshimo3","LOCALS",99)
+		SetGlobal("BYoshimo4","LOCALS",99)
+		SetGlobal("7C#Yoshi_fix_check","LOCALS",1)
+		Continue()
+END
