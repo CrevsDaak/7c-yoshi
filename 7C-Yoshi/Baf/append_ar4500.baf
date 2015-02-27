@@ -5,6 +5,6 @@ THEN
 	RESPONSE #100
 		CreateVisualEffect("SPPORTAL",[1999.1218])
 		Wait(2)
-		CreateCreature("Yoshi15",[1999.1218],S)
+		CreateCreature("Yoshi15",[1999.1218],0)
 		SetGlobal("YoshimoSpawnPlane","GLOBAL",1)
 END
