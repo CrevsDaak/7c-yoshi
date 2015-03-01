@@ -1,11 +1,11 @@
 // CrevsDaak: I changed the original #!
 // modding signature since it was causing
-// problems while installing in Mac.
+// problems while installing in Unix-likes.
 
 BACKUP ~7C-Yoshi/Backup~
-AUTHOR ~http://forums.gibberlings3.net/index.php?showtopic=26561~
+AUTHOR ~http://gibberlings3.net/forums/index.php?showtopic=26561~
 
-VERSION "v0.95 b"
+VERSION "v0.96 b"
 
 // so new files are created if they are missing
 ALLOW_MISSING
@@ -35,7 +35,7 @@ ACTION_IF GAME_IS "bg2ee eet" BEGIN
  OUTER_SET old_way = 1
  OUTER_TEXT_SPRINT yoshi ~"7C#Yoshi"~
 END ELSE BEGIN
- OUTER_TEXT_SPRINT exetopatch bgmain
+ OUTER_SET old_way = 0
  OUTER_TEXT_SPRINT yoshi ~"Yoshimo"~
 END
 
@@ -61,9 +61,9 @@ ACTION_PHP_EACH append_gtimes AS name => value BEGIN
 END
 
 ACTION_IF ENGINE_IS tob BEGIN
-  ACTION_IF FILE_EXISTS ~%exetopatch%.exe~ BEGIN
+  ACTION_IF FILE_EXISTS bgmain.exe BEGIN
 
-    COPY_EXISTING "%exetopatch%.exe" "%exetopatch%.exe"
+    COPY_EXISTING bgmain.exe bgmain.exe
       REPLACE_TEXTUALLY CASE_SENSITIVE ~YOSHIMO~ ~       ~
     BUT_ONLY
 
