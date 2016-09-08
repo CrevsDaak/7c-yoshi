@@ -1,0 +1,9 @@
+ACTION_IF %WEIDU_OS% STR_EQ "osx" BEGIN
+  COPY "BaldursGateIIEnhancedEdition.app/Contents/MacOS/BaldursGateIIEnhancedEdition" "BaldursGateIIEnhancedEdition.app/Contents/MacOS/BaldursGateIIEnhancedEdition"
+    REPLACE_TEXTUALLY "Yoshimo" ~~ (7)
+  BUT_ONLY
+END ELSE ACTION_IF %WEIDU_OS% STR_EQ "win32" BEGIN
+  COPY baldur.exe baldur.exe
+    REPLACE_TEXTUALLY "Yoshimo" ~~ (7)
+  BUT_ONLY
+END

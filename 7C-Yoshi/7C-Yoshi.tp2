@@ -30,7 +30,7 @@ LANGUAGE
 // ******* Keeping Yoshimo after Spellhold ******* \\
 BEGIN @9900 DESIGNATED 5
 REQUIRE_PREDICATE GAME_IS "bg2ee bgt tob soa eet" @9901
-
+/*
 ACTION_IF GAME_IS "bg2ee eet" BEGIN
  OUTER_SET old_way = 1
  OUTER_TEXT_SPRINT yoshi ~"7C#Yoshi"~
@@ -38,6 +38,8 @@ END ELSE BEGIN
  OUTER_SET old_way = 0
  OUTER_TEXT_SPRINT yoshi ~"Yoshimo"~
 END
+*/
+OUTER_TEXT_SPRINT yoshi ~"Yoshimo"~
 
 APPEND ~STATE.IDS~ ~0x80101FEF CD_STATE_NOTVALID~
   UNLESS ~0x80101FEF CD_STATE_NOTVALID~
@@ -60,6 +62,9 @@ ACTION_PHP_EACH append_gtimes AS name => value BEGIN
     UNLESS ~%value% %name%~
 END
 
+// CrevsDaak: look foward to using TobEx
+// patches if TobEx is installed instead
+// of patching the game's executable
 ACTION_IF ENGINE_IS tob BEGIN
   ACTION_IF FILE_EXISTS bgmain.exe BEGIN
 
@@ -220,8 +225,9 @@ COMPILE EVAL ~7C-Yoshi/Dlg/interjections.d~ USING "%tra%/interjections.tra"
 COMPILE EVAL ~7C-Yoshi/Dlg/n_yoshi_edit.d~ USING "%tra%/n_yoshi_edit.tra"
 COMPILE EVAL ~7C-Yoshi/Dlg/ToL.d~ USING "%tra%/tol.tra"
 
-ACTION_IF old_way BEGIN
-  INCLUDE ~7C-Yoshi/lib/the_old_way.tph~
+ACTION_IF GAME_IS "bg2ee eet" BEGIN
+  INCLUDE ~7C-Yoshi/lib/exe_patch.tpa~
+  PRINT @9902
 END
 
 /* ******************* CG YOSHI ********************************** */
