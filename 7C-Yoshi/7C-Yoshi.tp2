@@ -5,7 +5,7 @@
 BACKUP ~7C-Yoshi/Backup~
 AUTHOR ~http://gibberlings3.net/forums/index.php?showtopic=26561~
 
-VERSION "v0.96 b"
+VERSION "v0.97"
 
 // so new files are created if they are missing
 ALLOW_MISSING
@@ -30,15 +30,7 @@ LANGUAGE
 // ******* Keeping Yoshimo after Spellhold ******* \\
 BEGIN @9900 DESIGNATED 5
 REQUIRE_PREDICATE GAME_IS "bg2ee bgt tob soa eet" @9901
-/*
-ACTION_IF GAME_IS "bg2ee eet" BEGIN
- OUTER_SET old_way = 1
- OUTER_TEXT_SPRINT yoshi ~"7C#Yoshi"~
-END ELSE BEGIN
- OUTER_SET old_way = 0
- OUTER_TEXT_SPRINT yoshi ~"Yoshimo"~
-END
-*/
+
 OUTER_TEXT_SPRINT yoshi ~"Yoshimo"~
 
 APPEND ~STATE.IDS~ ~0x80101FEF CD_STATE_NOTVALID~
@@ -131,7 +123,7 @@ ACTION_IF GAME_IS "bg2ee eet" BEGIN
 	parameter2 = 11
 	timing = 2
      STR_VAR
-	resource = 7C#YOSHI
+	resource = EVAL %yoshi%
     END
     READ_LONG 0x6a effect_offset
     READ_SHORT 0x70 effect_count
@@ -147,7 +139,7 @@ END
 COPY "7C-Yoshi/Itm/7C#kat2.itm" override
   SAY NAME1 @9904
   SAY NAME2 @9905
-  PATCH_IF GAME_IS bg2ee BEGIN
+  PATCH_IF GAME_IS "bg2ee eet" BEGIN
     LPF ADD_ITEM_EQEFFECT
       INT_VAR
 	opcode = 319
@@ -156,7 +148,7 @@ COPY "7C-Yoshi/Itm/7C#kat2.itm" override
 	parameter2 = 11
 	timing = 2
      STR_VAR
-	resource = 7C#YOSHI
+	resource = EVAL %yoshi%
     END
     READ_LONG 0x6a effect_offset
     READ_SHORT 0x70 effect_count
@@ -173,7 +165,7 @@ COPY "7C-Yoshi/Itm/7C#kat2.itm" override
 
 /* * MAGE ENCOUNTER * */
 
-ACTION_IF GAME_IS bg2ee BEGIN
+ACTION_IF GAME_IS "bg2ee eet" BEGIN
   APPEND item_use.2da ~7C#KAT2   7C#YOSHI    9382   2~
     UNLESS ~7C#KAT2~
 
