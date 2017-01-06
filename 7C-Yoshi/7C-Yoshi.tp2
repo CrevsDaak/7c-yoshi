@@ -5,7 +5,7 @@
 BACKUP ~7C-Yoshi/Backup~
 AUTHOR ~http://gibberlings3.net/forums/index.php?showtopic=26561~
 
-VERSION "v0.97"
+VERSION "v0.98"
 
 // so new files are created if they are missing
 ALLOW_MISSING
@@ -89,8 +89,7 @@ END
 
 COPY_EXISTING npsw02.itm "override/7c#kat01.itm"
   // CrevsDaak: Remove stat requirements too
-  READ_BYTE  0x1e "usability"
-  WRITE_BYTE 0x1e (usability BAND 0b11000000)
+  WRITE_BYTE 0x1e (THIS BAND 0b11000000)
   PATCH_IF GAME_IS "bg2ee eet" BEGIN
     LPF DELETE_ITEM_EQEFFECT
       INT_VAR
@@ -123,7 +122,7 @@ ACTION_IF GAME_IS "bg2ee eet" BEGIN
 	parameter2 = 11
 	timing = 2
      STR_VAR
-	resource = EVAL %yoshi%
+	resource = "Yoshimo"
     END
     READ_LONG 0x6a effect_offset
     READ_SHORT 0x70 effect_count
@@ -148,7 +147,7 @@ COPY "7C-Yoshi/Itm/7C#kat2.itm" override
 	parameter2 = 11
 	timing = 2
      STR_VAR
-	resource = EVAL %yoshi%
+	resource = "Yoshimo"
     END
     READ_LONG 0x6a effect_offset
     READ_SHORT 0x70 effect_count
@@ -166,7 +165,7 @@ COPY "7C-Yoshi/Itm/7C#kat2.itm" override
 /* * MAGE ENCOUNTER * */
 
 ACTION_IF GAME_IS "bg2ee eet" BEGIN
-  APPEND item_use.2da ~7C#KAT2   7C#YOSHI    9382   2~
+  APPEND item_use.2da ~7C#KAT2   YOSHIMO    9382   2~
     UNLESS ~7C#KAT2~
 
   COPY ~7C-Yoshi/Portraits/ee~ override
@@ -232,12 +231,10 @@ BUT_ONLY
 
 ACTION_IF (MOD_IS_INSTALLED "7C-Yoshi.tp2" 5) BEGIN
   COPY_EXISTING_REGEXP GLOB ~7C#kat.*\.itm~ override
-    READ_BYTE 0x1e usability
-    WRITE_BYTE 0x1e (usability BAND 0b11111010)
+    WRITE_BYTE 0x1e (THIS BAND 0b11111010)
   BUT_ONLY
 END
 
 COPY_EXISTING npsw02.itm override
-  READ_BYTE 0x1e usability
-  WRITE_BYTE 0x1e (usability BAND 0b11111010)
+  WRITE_BYTE 0x1e (THIS BAND 0b11111010)
 BUT_ONLY
