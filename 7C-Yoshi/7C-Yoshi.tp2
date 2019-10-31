@@ -27,6 +27,11 @@ LANGUAGE
  "ENGLISH"
  "7C-Yoshi/lang/english/setup.tra"
 
+LANGUAGE
+  "Russian (Alisia & Arcanecoast.ru)"
+  "russian"
+  "7C-Yoshi/lang/russian/setup.tra"
+
 // ******* Keeping Yoshimo after Spellhold ******* \\
 BEGIN @9900 DESIGNATED 5
 REQUIRE_PREDICATE GAME_IS "bg2ee bgt tob soa eet" @9901
