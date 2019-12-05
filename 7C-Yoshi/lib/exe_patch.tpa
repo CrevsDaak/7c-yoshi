@@ -1,9 +1,11 @@
 ACTION_IF %WEIDU_OS% STR_EQ "osx" BEGIN
   COPY "BaldursGateIIEnhancedEdition.app/Contents/MacOS/BaldursGateIIEnhancedEdition" "BaldursGateIIEnhancedEdition.app/Contents/MacOS/BaldursGateIIEnhancedEdition"
-    REPLACE_TEXTUALLY "Yoshimo" ~~ (7)
+    REPLACE_TEXTUALLY EXACT_MATCH CASE_SENSITIVE "YOSHIMO" ~7C#0000~ (7)
   BUT_ONLY
 END ELSE ACTION_IF %WEIDU_OS% STR_EQ "win32" BEGIN
   COPY baldur.exe baldur.exe
-    REPLACE_TEXTUALLY "Yoshimo" ~~ (7)
+    REPLACE_TEXTUALLY EXACT_MATCH CASE_SENSITIVE "YOSHIMO" ~7C#0000~ (7)
   BUT_ONLY
+END ELSE BEGIN
+  FAIL "I haven't implemented Linux support yet. Please contact me (CrevsDaak) on the G3 forums and tell me where the linux exec is so that I can patch that shit as well"
 END

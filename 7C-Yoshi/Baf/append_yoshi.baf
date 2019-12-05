@@ -1,7 +1,7 @@
 IF
 	Global("7C#Yoshi","GLOBAL",0)
 	Global("7C#Yoshi_Brynnlaw","GLOBAL",1)
-	GlobalTimerExpired("7C#Yoshi_Brynnlaw","GLOBAL")
+	GlobalTimerExpired("7C#Yoshi_Brynnlaw_Timer","GLOBAL")
 	InParty(Myself)
 	See(Player1)
 	Global("7C#SpellHold","GLOBAL",0)

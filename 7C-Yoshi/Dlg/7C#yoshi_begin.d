@@ -36,7 +36,7 @@ END
 IF ~~ THEN BEGIN "7C#Brynn3"
 SAY @12
 ++ @13 + "7C#Brynn4"
-++ @14 DO ~JoinParty() 
+++ @14 DO ~JoinParty()
 SetDialogue("YOSHJ")~ EXIT
 END
 
@@ -49,8 +49,8 @@ END
 
 IF ~~ THEN BEGIN "7C#Brynn5"
 SAY @17
-++ @18 DO ~JoinParty() 
-SetGlobal("7C#YoshiLeftPreSpell","GLOBAL",1) 
+++ @18 DO ~JoinParty()
+SetGlobal("7C#YoshiLeftPreSpell","GLOBAL",1)
 SetGlobal("7C#BlatantStarWarsRef","GLOBAL",1)
 SetDialogue("YOSHJ")~ EXIT
 END

@@ -7,6 +7,6 @@ IF
 THEN
 	RESPONSE #100
 		SetGlobal("7C#Yoshi_Brynnlaw","GLOBAL",1)
-		SetGlobalTimer("7C#Yoshi_Brynnlaw","GLOBAL",THREE_ROUNDS)
+		SetGlobalTimer("7C#Yoshi_Brynnlaw_Timer","GLOBAL",THREE_ROUNDS)
 		Continue()
 END

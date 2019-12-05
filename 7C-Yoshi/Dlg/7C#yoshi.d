@@ -137,7 +137,7 @@ END
 IF ~~ THEN BEGIN "7C#Q39"
 SAY @70
 = @71
-IF ~~ THEN DO ~GiveItemCreate("7C#KAT01",Player1,0,0,0) 
+IF ~~ THEN DO ~GiveItemCreate("c7#KAT01",Player1,0,0,0) 
 GivePartyAllEquipment() 
 DestroyItem("NPSW02") 
 DestroySelf() 

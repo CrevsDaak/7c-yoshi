@@ -170,7 +170,7 @@ END
 IF ~~ THEN BEGIN 18
 SAY @68
 = @69
-++ @70 DO ~GiveItemCreate("7C#kat2",Player1,1,0,0)
+++ @70 DO ~GiveItemCreate("c7#kat2",Player1,1,0,0)
 EscapeAreaDestroy(4)
 ActionOverride("7C#Demor",EscapeAreaDestroy(4))~ EXTERN YOSHJ ~7C#t4~
 ++ @71 + 16

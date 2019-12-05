@@ -24,7 +24,7 @@ IF ~!Class(Player1,MAGE_ALL)~ THEN REPLY @11 GOTO "7C#18"
 END
 
 IF ~~ BEGIN "7C#9"
-SAY @12 
+SAY @12
 IF ~~ THEN DO ~LeaveParty() SetGlobal("7C#Yoshi","GLOBAL",1) EscapeAreaMove("ar1602",840,130,12) SetDialog("YOSHIP") NoAction()~ EXIT
 END
 
@@ -67,7 +67,7 @@ SAY @27
 ++ @28 + "7C#35"
 ++ @29 + "7C#36"
 END
-                                                                                                                        
+
 IF ~~ THEN BEGIN "7C#35"
 SAY @30
 ++ @31 + "7C#42"
@@ -104,7 +104,7 @@ SAY @42
 END
 
 IF ~~ THEN BEGIN "7C#49"
-SAY @46 
+SAY @46
 IF ~~ THEN DO ~EscapeAreaMove("ar1602",840,130,12) LeaveParty() SetGlobal("7C#Yoshi","GLOBAL",1) SetLeavePartyDialogFile() NoAction()~ EXIT
 END
 
@@ -127,7 +127,7 @@ SAY @52
 END
 
 IF ~~ THEN BEGIN "7C#62"
-SAY @56 
+SAY @56
 IF ~~ THEN DO ~LeaveParty() SetGlobal("7C#Yoshi","GLOBAL",1) EscapeAreaMove("ar1602",840,130,12) 
 SetGlobal("ButtPluggingCumBubble","GLOBAL",1) SetLeavePartyDialogFile() NoAction()~ EXIT
 END
